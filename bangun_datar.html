@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Perhitungan Bangun Datar - JavaScript</title>
+</head>
+
+<body>
+
+    <h1>Perhitungan Bangun Datar dengan JavaScript</h1>
+
+    <div id="output"></div>
+
+    <script>
+        /*
+        Fungsi menghitung luas persegi
+        Parameter:
+        sisi = panjang sisi persegi
+        */
+        function luasPersegi(sisi) {
+            return sisi * sisi;
+        }
+
+        /*
+        Fungsi menghitung luas persegi panjang
+        Parameter:
+        panjang = panjang bangun
+        lebar = lebar bangun
+        */
+        function luasPersegiPanjang(panjang, lebar) {
+            return panjang * lebar;
+        }
+
+        /*
+        Fungsi menghitung luas segitiga
+        Parameter:
+        alas = panjang alas
+        tinggi = tinggi segitiga
+        */
+        function luasSegitiga(alas, tinggi) {
+            return 0.5 * alas * tinggi;
+        }
+
+        // ===== Nilai parameter bebas =====
+        let sisi = 4;
+        let panjang = 8;
+        let lebar = 5;
+        let alas = 10;
+        let tinggi = 6;
+
+        // Menampilkan hasil ke halaman HTML
+        document.getElementById("output").innerHTML = `
+        <h3>Hasil Perhitungan:</h3>
+        Luas Persegi = ${luasPersegi(sisi)} <br>
+        Luas Persegi Panjang = ${luasPersegiPanjang(panjang, lebar)} <br>
+        Luas Segitiga = ${luasSegitiga(alas, tinggi)}
+    `;
+    </script>
+
+</body>
+
+</html>
