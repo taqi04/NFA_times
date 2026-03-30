@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sistem Manajemen Transportasi</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .card {
+            background: #fafafa;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 5px solid #007bff;
+            border-radius: 6px;
+        }
+
+        .hapus {
+            background: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>🚗 Sistem Manajemen Transportasi</h2>
+
+        <!-- FORM INPUT -->
+        <input type="text" id="nama" placeholder="Nama Pelanggan">
+        <input type="text" id="telepon" placeholder="Nomor Telepon">
+
+        <select id="kendaraan">
+            <option value="">Pilih Kendaraan</option>
+            <option>Motor</option>
+            <option>Mobil</option>
+            <option>Bus</option>
+        </select>
+
+        <button onclick="tambahPelanggan()">Tambah Penyewaan</button>
+
+        <h3>Daftar Pelanggan Menyewa</h3>
+        <div id="output"></div>
+
+    </div>
+
+    <script>
+
+        // ======================
+        // CLASS PELANGGAN (OOP)
+        // ======================
+        class Pelanggan {
+
+            constructor(nama, nomorTelepon, kendaraanDisewa) {
+                this.nama = nama;
+                this.nomorTelepon = nomorTelepon;
+                this.kendaraanDisewa = kendaraanDisewa;
+            }
+
+            // method transaksi
+            infoTransaksi() {
+                return `${this.nama} menyewa ${this.kendaraanDisewa}`;
+            }
+        }
+
+        // ======================
+        let daftarPelanggan = [];
+
+        // ======================
+        // TAMBAH DATA
+        // ======================
+        function tambahPelanggan() {
+
+            let nama = document.getElementById("nama").value;
+            let telepon = document.getElementById("telepon").value;
+            let kendaraan = document.getElementById("kendaraan").value;
+
+            if (nama === "" || telepon === "" || kendaraan === "") {
+                alert("Data harus diisi semua!");
+                return;
+            }
+
+            let pelangganBaru = new Pelanggan(nama, telepon, kendaraan);
+
+            daftarPelanggan.push(pelangganBaru);
+
+            tampilkanPelanggan();
+            resetForm();
+        }
+
+        // ======================
+        // TAMPILKAN DATA
+        // ======================
+        function tampilkanPelanggan() {
+
+            let output = document.getElementById("output");
+            output.innerHTML = "";
+
+            daftarPelanggan.forEach((p, index) => {
+
+                output.innerHTML += `
+        <div class="card">
+            <b>Nama:</b> ${p.nama}<br>
+            <b>Telepon:</b> ${p.nomorTelepon}<br>
+            <b>Kendaraan:</b> ${p.kendaraanDisewa}<br>
+            <button class="hapus" onclick="hapusPelanggan(${index})">
+                Hapus
+            </button>
+        </div>
+        `;
+            });
+        }
+
+        // ======================
+        // HAPUS DATA
+        // ======================
+        function hapusPelanggan(index) {
+            daftarPelanggan.splice(index, 1);
+            tampilkanPelanggan();
+        }
+
+        // ======================
+        // RESET FORM
+        // ======================
+        function resetForm() {
+            document.getElementById("nama").value = "";
+            document.getElementById("telepon").value = "";
+            document.getElementById("kendaraan").value = "";
+        }
+
+    </script>
+
+</body>
+
+</html>
