@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manajemen Produk</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input,
+        button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding: 8px;
+            background: #f1f1f1;
+            border-radius: 6px;
+        }
+
+        .hapus {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>🛒 Manajemen Produk</h2>
+
+        <input type="text" id="nama" placeholder="Nama Produk">
+        <input type="number" id="harga" placeholder="Harga Produk">
+        <button id="tambahBtn">Tambah Produk</button>
+
+        <ul id="daftarProduk"></ul>
+    </div>
+
+    <script>
+
+        /* ======================
+           CLASS PRODUK (OOP)
+        ======================*/
+        class ProdukManager {
+
+            constructor() {
+                this.produkList = [
+                    { id: 1, nama: "Laptop", harga: 12000000 },
+                    { id: 2, nama: "Smartphone", harga: 5000000 },
+                    { id: 3, nama: "Keyboard", harga: 300000 },
+                    { id: 4, nama: "Mouse", harga: 150000 },
+                    { id: 5, nama: "Monitor", harga: 2500000 }
+                ];
+            }
+
+            /* FORMAT RUPIAH */
+            formatRupiah(angka) {
+                return new Intl.NumberFormat("id-ID").format(angka);
+            }
+
+            /* TAMPILKAN PRODUK (Destructuring) */
+            tampilkan() {
+                const list = document.getElementById("daftarProduk");
+                list.innerHTML = "";
+
+                this.produkList.forEach(({ id, nama, harga }) => {
+                    const li = document.createElement("li");
+
+                    li.innerHTML = `
+        <span>${nama} - Rp ${this.formatRupiah(harga)}</span>
+        <button class="hapus" data-id="${id}">Hapus</button>
+      `;
+
+                    list.appendChild(li);
+                });
+            }
+
+            /* TAMBAH PRODUK (Spread Operator) */
+            tambah(id, nama, harga) {
+                const produkBaru = { id, nama, harga };
+                this.produkList = [...this.produkList, produkBaru];
+                this.tampilkan();
+            }
+
+            /* HAPUS PRODUK (Rest Parameter) */
+            hapus(...ids) {
+                this.produkList = this.produkList.filter(
+                    produk => !ids.includes(produk.id)
+                );
+                this.tampilkan();
+            }
+        }
+
+        /* ======================
+           INISIALISASI
+        ======================*/
+        const app = new ProdukManager();
+        app.tampilkan();
+
+        /* ======================
+           EVENT LISTENER TAMBAH
+        ======================*/
+        document.getElementById("tambahBtn")
+            .addEventListener("click", () => {
+
+                const nama = document.getElementById("nama").value;
+                const harga = Number(document.getElementById("harga").value);
+
+                if (!nama || !harga) {
+                    alert("Isi semua data!");
+                    return;
+                }
+
+                const idBaru =
+                    app.produkList.length > 0
+                        ? app.produkList.at(-1).id + 1
+                        : 1;
+
+                app.tambah(idBaru, nama, harga);
+            });
+
+
+        /* ======================
+           EVENT DELEGATION
+        ======================*/
+        document.getElementById("daftarProduk")
+            .addEventListener("click", (event) => {
+
+                if (event.target.classList.contains("hapus")) {
+                    const id = Number(event.target.dataset.id);
+                    app.hapus(id);
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>
