@@ -5,7 +5,7 @@ function Footer() {
         © 2026 MyReactSite — Built with React & Bootstrap
       </p>
     </footer>
-  )
+  );
 }
 
 export default Footer
