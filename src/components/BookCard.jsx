@@ -1,0 +1,1 @@
+function BookCard({ book }) { return ( <div className="book-card"> <div className="book-card-img"> <img src={book.image} alt={book.title} /> </div> <div className="book-card-body"> <h3>{book.title}</h3> <p>{book.author}</p> <button className="buy-btn"> Buy Now </button> </div> </div> ); } export default BookCard;

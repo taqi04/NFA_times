@@ -1,0 +1,64 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#f5f7fa;
+}
+
+/* CONTAINER */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+/* GRID SYSTEM */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+
+/* BOOK CARD */
+.book-card{
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.book-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+
+.book-card-img{
+  width:100%;
+  height:260px;
+  overflow:hidden;
+}
+
+.book-card-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.book-card-body{
+  padding:15px;
+}
+
+.buy-btn{
+  width:100%;
+  padding:10px;
+  background:#facc15;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}

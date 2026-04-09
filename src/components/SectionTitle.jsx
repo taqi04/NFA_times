@@ -1,0 +1,1 @@
+export default function SectionTitle({title,subtitle}){ return( <div style={{marginBottom:"30px"}}> <h2>{title}</h2> <p style={{color:"gray"}}>{subtitle}</p> </div> ) }

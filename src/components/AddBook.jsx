@@ -1,0 +1,1 @@
+export default function AddBook({ setBooks, books }) { const handleAdd = () => { const newBook = { id: Date.now(), title: "New Book", author: "Unknown", price: 80000, image:"https://images-na.ssl-images-amazon.com/images/I/71KilybDOoL.jpg" }; setBooks([...books, newBook]); }; return ( <button onClick={handleAdd}> ➕ Add Book </button> ); }
